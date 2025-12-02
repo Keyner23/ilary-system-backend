@@ -38,7 +38,7 @@ Read [CONTRIBUTING.MD](.github/CONTRIBUTING.md) for more details.
 - Keyner Barrios [@keyner23](https://github.com/keyner23) 
 - Juan David Contreras [@contrerinhaz](https://github.com/contrerinhaz) 
 - Martha Escobar [@Martha-10](https://github.com/Martha-10) 
-- Dilan Marin [@developer-dylan](https://github.com/developer-dylan) 
+- Dylan Marin [@developer-dylan](https://github.com/developer-dylan) 
 - Jafit Barraza
 
 ---
