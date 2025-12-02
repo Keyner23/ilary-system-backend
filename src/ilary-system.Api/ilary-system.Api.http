@@ -1,0 +1,6 @@
+@ilary_system.Api_HostAddress = http://localhost:5047
+
+GET {{ilary_system.Api_HostAddress}}/weatherforecast/
+Accept: application/json
+
+###

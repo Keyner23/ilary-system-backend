@@ -9,7 +9,7 @@ type/AZURE-CODE
 
 ### Examples:
 - `feat/ILARY-101` ➜ New feature for Jira ticket BOA-101
--`fix/ILARY-202` ➜ Bug fix related to Jira ticket BOA-202
+- `fix/ILARY-202` ➜ Bug fix related to Jira ticket BOA-202
 - `docs/ILARY-303` ➜ Documentation updates for Jira ticket BOA-303
 
 ## Commit Messages

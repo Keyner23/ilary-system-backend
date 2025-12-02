@@ -1,0 +1,24 @@
+# Build
+bin/
+obj/
+
+# Rider / JetBrains
+.idea/
+.git
+
+# VSCode configs
+.vscode/
+
+# User-specific files
+*.user
+*.suo
+*.iml
+
+# Logs
+*.log
+
+# NuGet packages
+*.nupkg
+
+# Temp
+*.DS_Store
