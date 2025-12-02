@@ -11,6 +11,15 @@ It contains the entire system backend, along with its `README.md` file for all i
 ## Project Structure
 
 ```
+.
+├── ilary-system-backend.sln
+├── LICENSE
+├── README.md
+└── src
+    ├── ilary-system.Api
+    ├── ilary-system.Application
+    ├── ilary-system.Domain
+    └── ilary-system.Infrastructure
 ```
 
 ---
