@@ -9,6 +9,7 @@ public class ApplicationDbContext : DbContext
         : base(options) { }
     
     public DbSet<Roles> Roles => Set<Roles>();
+    public DbSet<Coder> Coder => Set<Coder>();
     public DbSet<Company> Companies => Set<Company>();
     public DbSet<JobApplication> JobApplications => Set<JobApplication>();
 }

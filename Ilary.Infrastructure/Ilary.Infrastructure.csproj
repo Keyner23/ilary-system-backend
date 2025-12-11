@@ -16,6 +16,7 @@
     </ItemGroup>
 
     <ItemGroup>
+      <ProjectReference Include="..\Ilary.Application\Ilary.Application.csproj" />
       <ProjectReference Include="..\Ilary.Domain\Ilary.Domain.csproj" />
     </ItemGroup>
 
