@@ -5,6 +5,13 @@ var builder = WebApplication.CreateBuilder(args);
 builder.Services.AddEndpointsApiExplorer();
 builder.Services.AddSwaggerGen();
 
+//add controllers
+builder.Services.AddControllers();
+// Swagger
+builder.Services.AddEndpointsApiExplorer();
+
+
+
 var app = builder.Build();
 
 // Configure the HTTP request pipeline.
