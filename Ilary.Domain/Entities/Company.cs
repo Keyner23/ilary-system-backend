@@ -8,4 +8,5 @@ public class Company
     public string Description { get; set; } = string.Empty;
     public DateTime Created { get; set; }
     public DateTime Updated { get; set; }
+    public ICollection<Roles> Role { get; set; } = new List<Roles>();
 }
