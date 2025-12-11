@@ -3,6 +3,7 @@ using System;
 using Ilary.Infrastructure.Persistence;
 using Microsoft.EntityFrameworkCore;
 using Microsoft.EntityFrameworkCore.Infrastructure;
+using Microsoft.EntityFrameworkCore.Migrations;
 using Microsoft.EntityFrameworkCore.Storage.ValueConversion;
 using Npgsql.EntityFrameworkCore.PostgreSQL.Metadata;
 
@@ -11,9 +12,11 @@ using Npgsql.EntityFrameworkCore.PostgreSQL.Metadata;
 namespace Ilary.Infrastructure.Migrations
 {
     [DbContext(typeof(ApplicationDbContext))]
-    partial class ApplicationDbContextModelSnapshot : ModelSnapshot
+    [Migration("20251211215838_ActualizacionEntidades")]
+    partial class ActualizacionEntidades
     {
-        protected override void BuildModel(ModelBuilder modelBuilder)
+        /// <inheritdoc />
+        protected override void BuildTargetModel(ModelBuilder modelBuilder)
         {
 #pragma warning disable 612, 618
             modelBuilder
@@ -43,6 +46,9 @@ namespace Ilary.Infrastructure.Migrations
                         .IsRequired()
                         .HasColumnType("text");
 
+                    b.Property<int?>("JobApplicationId")
+                        .HasColumnType("integer");
+
                     b.Property<string>("Name")
                         .IsRequired()
                         .HasColumnType("text");
@@ -58,6 +64,8 @@ namespace Ilary.Infrastructure.Migrations
                         .HasColumnType("timestamp with time zone");
 
                     b.HasKey("Id");
+
+                    b.HasIndex("JobApplicationId");
 
                     b.HasIndex("RolesId");
 
@@ -77,6 +85,9 @@ namespace Ilary.Infrastructure.Migrations
                         .IsRequired()
                         .HasColumnType("text");
 
+                    b.Property<int?>("JobApplicationId")
+                        .HasColumnType("integer");
+
                     b.Property<int>("NIT")
                         .HasColumnType("integer");
 
@@ -92,6 +103,8 @@ namespace Ilary.Infrastructure.Migrations
 
                     b.HasKey("Id");
 
+                    b.HasIndex("JobApplicationId");
+
                     b.HasIndex("RolesId");
 
                     b.ToTable("Companies");
@@ -105,12 +118,6 @@ namespace Ilary.Infrastructure.Migrations
 
                     NpgsqlPropertyBuilderExtensions.UseIdentityByDefaultColumn(b.Property<int>("Id"));
 
-                    b.Property<Guid?>("CoderId")
-                        .HasColumnType("uuid");
-
-                    b.Property<Guid?>("CompanyId")
-                        .HasColumnType("uuid");
-
                     b.Property<DateTime>("Created")
                         .HasColumnType("timestamp with time zone");
 
@@ -118,10 +125,6 @@ namespace Ilary.Infrastructure.Migrations
                         .HasColumnType("timestamp with time zone");
 
                     b.HasKey("Id");
-
-                    b.HasIndex("CoderId");
-
-                    b.HasIndex("CompanyId");
 
                     b.ToTable("JobApplications");
                 });
@@ -143,6 +146,10 @@ namespace Ilary.Infrastructure.Migrations
 
             modelBuilder.Entity("Ilary.Domain.Entities.Coder", b =>
                 {
+                    b.HasOne("Ilary.Domain.Entities.JobApplication", null)
+                        .WithMany("Coder")
+                        .HasForeignKey("JobApplicationId");
+
                     b.HasOne("Ilary.Domain.Entities.Roles", null)
                         .WithMany("Coder")
                         .HasForeignKey("RolesId");
@@ -150,6 +157,10 @@ namespace Ilary.Infrastructure.Migrations
 
             modelBuilder.Entity("Ilary.Domain.Entities.Company", b =>
                 {
+                    b.HasOne("Ilary.Domain.Entities.JobApplication", null)
+                        .WithMany("Company")
+                        .HasForeignKey("JobApplicationId");
+
                     b.HasOne("Ilary.Domain.Entities.Roles", null)
                         .WithMany("Company")
                         .HasForeignKey("RolesId");
@@ -157,23 +168,9 @@ namespace Ilary.Infrastructure.Migrations
 
             modelBuilder.Entity("Ilary.Domain.Entities.JobApplication", b =>
                 {
-                    b.HasOne("Ilary.Domain.Entities.Coder", null)
-                        .WithMany("JobApplication")
-                        .HasForeignKey("CoderId");
+                    b.Navigation("Coder");
 
-                    b.HasOne("Ilary.Domain.Entities.Company", null)
-                        .WithMany("JobApplication")
-                        .HasForeignKey("CompanyId");
-                });
-
-            modelBuilder.Entity("Ilary.Domain.Entities.Coder", b =>
-                {
-                    b.Navigation("JobApplication");
-                });
-
-            modelBuilder.Entity("Ilary.Domain.Entities.Company", b =>
-                {
-                    b.Navigation("JobApplication");
+                    b.Navigation("Company");
                 });
 
             modelBuilder.Entity("Ilary.Domain.Entities.Roles", b =>
