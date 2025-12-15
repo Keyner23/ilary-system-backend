@@ -25,6 +25,7 @@ public class CoderService
             Name = dto.Name,
             Document = dto.Document,
             PhoneNumber = dto.PhoneNumber,
+            Description = dto.Description,
             Email = dto.Email,
             Created = DateTime.UtcNow,
             Updated = DateTime.UtcNow
