@@ -30,13 +30,14 @@ public class CoderService
             Updated = DateTime.UtcNow
         };
 
-        // Rol por defecto (solo ID)
-        coder.JobApplication.Add(new Roles
+        // Rol por defecto (solo ID, ya existe en BD)
+        coder.Roles.Add(new Roles
         {
             Id = Guid.Parse("3fa85f64-5717-4562-b3fc-2c963f66afa6")
         });
 
         await _repository.AddAsync(coder);
     }
+
 
 }

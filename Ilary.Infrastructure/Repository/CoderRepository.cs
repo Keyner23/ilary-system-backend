@@ -21,13 +21,15 @@ public class CoderRepository :ICoderRepository
     
     public async Task AddAsync(Coder coder)
     {
-        foreach (var role in coder.JobApplication)
+        foreach (var role in coder.Roles)
         {
-            _context.Attach(role); 
+            _context.Attach(role); // le dices a EF: este role ya existe
         }
+
         _context.Coder.Add(coder);
-        int rows   = await _context.SaveChangesAsync();
+        await _context.SaveChangesAsync();
     }
+
 
     public Task UpdateAsync(Coder coder)
     {

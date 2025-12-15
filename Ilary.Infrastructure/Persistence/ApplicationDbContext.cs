@@ -17,8 +17,9 @@ public class ApplicationDbContext : DbContext
         base.OnModelCreating(modelBuilder);
 
         modelBuilder.Entity<Coder>()
-            .HasMany(c => c.JobApplication)
-            .WithMany()
+            .HasMany(c => c.Roles)
+            .WithMany(r => r.Coders)
             .UsingEntity(j => j.ToTable("CoderRoles"));
     }
+
 }
