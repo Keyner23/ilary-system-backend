@@ -9,6 +9,17 @@ public class ApplicationDbContext : DbContext
         : base(options) { }
     
     public DbSet<Roles> Roles => Set<Roles>();
+    public DbSet<Coder> Coder => Set<Coder>();
     public DbSet<Company> Companies => Set<Company>();
     public DbSet<JobApplication> JobApplications => Set<JobApplication>();
+    protected override void OnModelCreating(ModelBuilder modelBuilder)
+    {
+        base.OnModelCreating(modelBuilder);
+
+        modelBuilder.Entity<Coder>()
+            .HasMany(c => c.Roles)
+            .WithMany(r => r.Coders)
+            .UsingEntity(j => j.ToTable("CoderRoles"));
+    }
+
 }
