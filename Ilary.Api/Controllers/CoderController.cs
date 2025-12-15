@@ -3,8 +3,8 @@ using Ilary.Application.Services;
 using Ilary.Domain.Entities;
 using Microsoft.AspNetCore.Mvc;
 
-namespace Ilary.Api.Controllers;
 
+namespace Ilary.Api.Controllers;
 
 [ApiController]
 [Route("api/v1/[controller]")]

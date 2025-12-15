@@ -13,9 +13,11 @@ builder.Services.AddDbContext<ApplicationDbContext>(options =>
 
 //Services
 builder.Services.AddScoped<CoderService>();
+builder.Services.AddScoped<CompanyService>();
 
 //Repositories
 builder.Services.AddScoped<ICoderRepository, CoderRepository>();
+builder.Services.AddScoped<ICompanyRepository, CompanyRepository>();
 
 
 //  Swagger
