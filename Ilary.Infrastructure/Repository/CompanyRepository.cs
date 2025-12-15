@@ -5,38 +5,31 @@ using Microsoft.EntityFrameworkCore;
 
 namespace Ilary.Infrastructure.Repository;
 
-public class CoderRepository :ICoderRepository
+public class CompanyRepository:ICompanyRepository
 {
     private readonly ApplicationDbContext _context;
     
-    public CoderRepository(ApplicationDbContext context)
+    public CompanyRepository(ApplicationDbContext context)
     {
         _context = context;
     }
     
-    
-    public async Task<IEnumerable<Coder>> GetAllAsync() =>
-        await _context.Coder.ToListAsync();
+    public async Task<IEnumerable<Company>> GetAllAsync() =>
+        await _context.Companies.ToListAsync();
 
     
-    public async Task AddAsync(Coder coder)
+    public async Task AddAsync(Company Company)
     {
-        foreach (var role in coder.Roles)
-        {
-            _context.Attach(role); 
-        }
-
-        _context.Coder.Add(coder);
+        _context.Companies.Add(Company);
         await _context.SaveChangesAsync();
     }
 
-
-    public Task UpdateAsync(Coder coder)
+    public Task UpdateAsync(Company Company)
     {
         throw new NotImplementedException();
     }
 
-    public Task DeleteAsync(Guid id)
+    public Task DeleteAsync(Company id)
     {
         throw new NotImplementedException();
     }
