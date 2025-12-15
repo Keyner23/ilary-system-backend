@@ -1,3 +1,4 @@
+using Ilary.Application.DTOs;
 using Ilary.Application.Services;
 using Ilary.Domain.Entities;
 using Microsoft.AspNetCore.Mvc;
@@ -24,9 +25,9 @@ public class CoderController : Controller
     }
     
     [HttpPost]
-    public async Task<IActionResult> CreateCustomer([FromBody] Coder coder)
+    public async Task<IActionResult> CreateCustomer([FromBody] CreateCoderDto dto)
     {
-        await _service.AddCustomerAsync(coder);
+        await _service.AddCustomerAsync(dto);
         return Ok(new { message = "Cliente creado correctamente" });
     }
 }

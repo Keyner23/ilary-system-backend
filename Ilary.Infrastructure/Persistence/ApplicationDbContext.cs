@@ -12,4 +12,13 @@ public class ApplicationDbContext : DbContext
     public DbSet<Coder> Coder => Set<Coder>();
     public DbSet<Company> Companies => Set<Company>();
     public DbSet<JobApplication> JobApplications => Set<JobApplication>();
+    protected override void OnModelCreating(ModelBuilder modelBuilder)
+    {
+        base.OnModelCreating(modelBuilder);
+
+        modelBuilder.Entity<Coder>()
+            .HasMany(c => c.JobApplication)
+            .WithMany()
+            .UsingEntity(j => j.ToTable("CoderRoles"));
+    }
 }

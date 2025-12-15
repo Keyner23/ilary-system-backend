@@ -21,6 +21,10 @@ public class CoderRepository :ICoderRepository
     
     public async Task AddAsync(Coder coder)
     {
+        foreach (var role in coder.JobApplication)
+        {
+            _context.Attach(role); 
+        }
         _context.Coder.Add(coder);
         int rows   = await _context.SaveChangesAsync();
     }
