@@ -20,6 +20,18 @@ public class ApplicationDbContext : DbContext
             .HasMany(c => c.Roles)
             .WithMany(r => r.Coders)
             .UsingEntity(j => j.ToTable("CoderRoles"));
+        
+        modelBuilder.Entity<JobApplication>()
+            .HasOne(j => j.Coder)
+            .WithMany() // Un Coder puede tener muchas Aplicaciones de Trabajo
+            .HasForeignKey(j => j.CoderId)
+            .OnDelete(DeleteBehavior.Cascade);
+
+        modelBuilder.Entity<JobApplication>()
+            .HasOne(j => j.Company)
+            .WithMany() // Una Company puede tener muchas Aplicaciones de Trabajo
+            .HasForeignKey(j => j.CompanyId)
+            .OnDelete(DeleteBehavior.Cascade);
     }
 
 }
