@@ -3,6 +3,7 @@ using System;
 using Ilary.Infrastructure.Persistence;
 using Microsoft.EntityFrameworkCore;
 using Microsoft.EntityFrameworkCore.Infrastructure;
+using Microsoft.EntityFrameworkCore.Migrations;
 using Microsoft.EntityFrameworkCore.Storage.ValueConversion;
 using Npgsql.EntityFrameworkCore.PostgreSQL.Metadata;
 
@@ -11,9 +12,11 @@ using Npgsql.EntityFrameworkCore.PostgreSQL.Metadata;
 namespace Ilary.Infrastructure.Migrations
 {
     [DbContext(typeof(ApplicationDbContext))]
-    partial class ApplicationDbContextModelSnapshot : ModelSnapshot
+    [Migration("20251215224925_CorrecionDbContext")]
+    partial class CorrecionDbContext
     {
-        protected override void BuildModel(ModelBuilder modelBuilder)
+        /// <inheritdoc />
+        protected override void BuildTargetModel(ModelBuilder modelBuilder)
         {
 #pragma warning disable 612, 618
             modelBuilder
@@ -115,13 +118,7 @@ namespace Ilary.Infrastructure.Migrations
 
                     NpgsqlPropertyBuilderExtensions.UseIdentityByDefaultColumn(b.Property<int>("Id"));
 
-                    b.Property<Guid>("CoderId")
-                        .HasColumnType("uuid");
-
-                    b.Property<Guid>("CompanyId")
-                        .HasColumnType("uuid");
-
-                    b.Property<Guid?>("CompanyId1")
+                    b.Property<Guid?>("CompanyId")
                         .HasColumnType("uuid");
 
                     b.Property<DateTime>("Created")
@@ -132,11 +129,7 @@ namespace Ilary.Infrastructure.Migrations
 
                     b.HasKey("Id");
 
-                    b.HasIndex("CoderId");
-
                     b.HasIndex("CompanyId");
-
-                    b.HasIndex("CompanyId1");
 
                     b.ToTable("JobApplications");
                 });
@@ -180,25 +173,9 @@ namespace Ilary.Infrastructure.Migrations
 
             modelBuilder.Entity("Ilary.Domain.Entities.JobApplication", b =>
                 {
-                    b.HasOne("Ilary.Domain.Entities.Coder", "Coder")
-                        .WithMany()
-                        .HasForeignKey("CoderId")
-                        .OnDelete(DeleteBehavior.Cascade)
-                        .IsRequired();
-
-                    b.HasOne("Ilary.Domain.Entities.Company", "Company")
-                        .WithMany()
-                        .HasForeignKey("CompanyId")
-                        .OnDelete(DeleteBehavior.Cascade)
-                        .IsRequired();
-
                     b.HasOne("Ilary.Domain.Entities.Company", null)
                         .WithMany("JobApplication")
-                        .HasForeignKey("CompanyId1");
-
-                    b.Navigation("Coder");
-
-                    b.Navigation("Company");
+                        .HasForeignKey("CompanyId");
                 });
 
             modelBuilder.Entity("Ilary.Domain.Entities.Company", b =>

@@ -21,7 +21,6 @@ public class ApplicationDbContext : DbContext
             .WithMany(r => r.Coders)
             .UsingEntity(j => j.ToTable("CoderRoles"));
         
-        
         modelBuilder.Entity<JobApplication>()
             .HasOne(j => j.Coder)
             .WithMany() // Un Coder puede tener muchas Aplicaciones de Trabajo
