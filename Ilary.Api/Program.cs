@@ -15,6 +15,7 @@ builder.Services.AddDbContext<ApplicationDbContext>(options =>
 builder.Services.AddScoped<CoderService>();
 builder.Services.AddScoped<CompanyService>();
 builder.Services.AddScoped<JobApplicationService>();
+builder.Services.AddScoped<AuthService>();
 
 //Repositories
 builder.Services.AddScoped<ICoderRepository, CoderRepository>();

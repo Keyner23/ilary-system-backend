@@ -10,23 +10,27 @@ namespace Ilary.Api.Controllers;
 public class CompanyController : Controller
 {
     private readonly CompanyService _service;
-    
-    public CompanyController(CompanyService service)
+    private readonly AuthService _authService;
+
+    public CompanyController(CompanyService service,
+        AuthService authService)
     {
         _service = service;
+        _authService = authService;
     }
-    
+
     [HttpGet]
     public async Task<IActionResult> GetCustomer()
     {
         var company = await _service.GetCompanyAsync();
         return Ok(company);
     }
-    
-    [HttpPost]
-    public async Task<IActionResult> CreateCompany([FromBody] CreateCompanyDto dto)
+
+    [HttpPost("login/company")]
+    public async Task<IActionResult> LoginCompany([FromQuery] int nit)
     {
-        await _service.AddCompanyAsync(dto);
-        return Ok(new { message = "Compañia creada correctamente" });
+        var result = await _authService.LoginCompanyAsync(nit);
+        return Ok(result);
     }
+
 }

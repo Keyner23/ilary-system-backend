@@ -21,10 +21,21 @@ public class CompanyService
         {
             Id = Guid.NewGuid(),
             Name = dto.Name,
+            NIT= dto.NIT,
             Description = dto.Description,
             Created = DateTime.UtcNow,
             Updated = DateTime.UtcNow
         };
         await _repository.AddAsync(company);
+    }
+    
+    public async Task<Company> LoginCompanyAsync(int nit)
+    {
+        var company = await _repository.GetByNitAsync(nit);
+
+        if (company == null)
+            throw new Exception("Company no encontrada");
+
+        return company;
     }
 }

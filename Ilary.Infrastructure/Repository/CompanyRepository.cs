@@ -23,6 +23,13 @@ public class CompanyRepository:ICompanyRepository
         _context.Companies.Add(Company);
         await _context.SaveChangesAsync();
     }
+    
+    public async Task<Company?> GetByNitAsync(int nit)
+    {
+        return await _context.Companies
+            .FirstOrDefaultAsync(c => c.NIT == nit);
+    }
+
 
     public Task UpdateAsync(Company Company)
     {

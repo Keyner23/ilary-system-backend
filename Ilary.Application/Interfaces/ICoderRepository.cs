@@ -8,4 +8,8 @@ public interface ICoderRepository
     Task AddAsync(Coder coder);
     Task UpdateAsync(Coder coder);
     Task DeleteAsync(Guid id);
+    
+        Task<Coder?> GetByEmailAndDocumentAsync(string email, string document);
+    
+
 }

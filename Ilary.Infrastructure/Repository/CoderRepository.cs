@@ -29,6 +29,14 @@ public class CoderRepository :ICoderRepository
         _context.Coder.Add(coder);
         await _context.SaveChangesAsync();
     }
+    public async Task<Coder?> GetByEmailAndDocumentAsync(string email, string document)
+    {
+        return await _context.Coder
+            .FirstOrDefaultAsync(c =>
+                c.Email == email &&
+                c.Document == document);
+    }
+
 
 
     public Task UpdateAsync(Coder coder)

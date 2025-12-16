@@ -8,4 +8,5 @@ public interface ICompanyRepository
     Task AddAsync(Company Company);
     Task UpdateAsync(Company Company);
     Task DeleteAsync(Company id);
+    Task<Company?> GetByNitAsync(int nit);
 }
