@@ -33,5 +33,7 @@ public class ApplicationDbContext : DbContext
             .HasForeignKey(j => j.CompanyId)
             .OnDelete(DeleteBehavior.Cascade);
     }
+    
+    
 
 }
