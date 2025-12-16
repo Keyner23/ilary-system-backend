@@ -1,10 +1,11 @@
+using Ilary.Application.Interfaces;
 using Ilary.Domain.Entities;
 using Ilary.Infrastructure.Persistence;
 using Microsoft.EntityFrameworkCore;
 
 namespace Ilary.Infrastructure.Repository;
 
-public class RoleRepository
+public class RoleRepository : IRoleRepository
 {
     private readonly ApplicationDbContext _context;
 
@@ -13,8 +14,14 @@ public class RoleRepository
         _context = context;
     }
 
-    public async Task<Roles?> GetByIdAsync(Guid id)
+    public async Task<Roles?> GetByNameAsync(string name)
     {
-        return await _context.Roles.FirstOrDefaultAsync(r => r.Id == id);
+        return await _context.Roles.FirstOrDefaultAsync(r => r.Name.ToLower() == name.ToLower());
+    }
+
+    public async Task AddAsync(Roles role)
+    {
+        _context.Roles.Add(role);
+        await _context.SaveChangesAsync();
     }
 }

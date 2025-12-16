@@ -10,5 +10,10 @@
         <ProjectReference Include="..\Ilary.Domain\Ilary.Domain.csproj" />
     </ItemGroup>
 
+    <ItemGroup>
+      <PackageReference Include="BCrypt.Net-Next" Version="4.0.3" />
+      <PackageReference Include="System.IdentityModel.Tokens.Jwt" Version="8.15.0" />
+    </ItemGroup>
+
 
 </Project>

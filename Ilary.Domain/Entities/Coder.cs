@@ -8,6 +8,7 @@ public class Coder
     public string Description { get; set; } = string.Empty;
     public string PhoneNumber { get; set; } = string.Empty;
     public string Email { get; set; } = string.Empty;
+    public string Password { get; set; } = string.Empty;
     public ICollection<Roles> Roles { get; set; } = new List<Roles>();
     public DateTime Created { get; set; }
     public DateTime Updated { get; set; }
