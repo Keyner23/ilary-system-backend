@@ -6,7 +6,8 @@ public interface ICompanyRepository
 {
     Task<IEnumerable<Company>> GetAllAsync();
     Task AddAsync(Company Company);
-    Task UpdateAsync(Company Company);
     Task<Company?> GetByEmailAsync(string email);
+    Task<Company?> GetByIdAsync(Guid id);
+
     Task DeleteAsync(Company id);
 }

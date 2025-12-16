@@ -9,7 +9,10 @@ public class JobApplication
     public Guid CoderId { get; set; }
     public Coder Coder { get; set; }
 
-    public Guid CompanyId { get; set; }
-    public Company Company { get; set; }
+    public Guid JobId { get; set; }
+    public Job Job { get; set; }
+
+    public Guid StatusId { get; set; }
+    public ApplicationStatus Status { get; set; }
     
 }

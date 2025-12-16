@@ -3,6 +3,7 @@ using System;
 using Ilary.Infrastructure.Persistence;
 using Microsoft.EntityFrameworkCore;
 using Microsoft.EntityFrameworkCore.Infrastructure;
+using Microsoft.EntityFrameworkCore.Migrations;
 using Microsoft.EntityFrameworkCore.Storage.ValueConversion;
 using Npgsql.EntityFrameworkCore.PostgreSQL.Metadata;
 
@@ -11,9 +12,11 @@ using Npgsql.EntityFrameworkCore.PostgreSQL.Metadata;
 namespace Ilary.Infrastructure.Migrations
 {
     [DbContext(typeof(ApplicationDbContext))]
-    partial class ApplicationDbContextModelSnapshot : ModelSnapshot
+    [Migration("20251216170333_AddCompanyRoles")]
+    partial class AddCompanyRoles
     {
-        protected override void BuildModel(ModelBuilder modelBuilder)
+        /// <inheritdoc />
+        protected override void BuildTargetModel(ModelBuilder modelBuilder)
         {
 #pragma warning disable 612, 618
             modelBuilder
@@ -50,82 +53,6 @@ namespace Ilary.Infrastructure.Migrations
                     b.HasIndex("RolesId");
 
                     b.ToTable("CompanyRoles", (string)null);
-                });
-
-            modelBuilder.Entity("Ilary.Domain.Entities.ApplicationStatus", b =>
-                {
-                    b.Property<Guid>("Id")
-                        .ValueGeneratedOnAdd()
-                        .HasColumnType("uuid");
-
-                    b.Property<string>("Color")
-                        .IsRequired()
-                        .HasColumnType("text");
-
-                    b.Property<DateTime>("Created")
-                        .HasColumnType("timestamp with time zone");
-
-                    b.Property<string>("Description")
-                        .IsRequired()
-                        .HasColumnType("text");
-
-                    b.Property<string>("Name")
-                        .IsRequired()
-                        .HasColumnType("text");
-
-                    b.Property<int>("Order")
-                        .HasColumnType("integer");
-
-                    b.HasKey("Id");
-
-                    b.ToTable("ApplicationStatuses");
-
-                    b.HasData(
-                        new
-                        {
-                            Id = new Guid("00000000-0000-0000-0000-000000000001"),
-                            Color = "info",
-                            Created = new DateTime(2025, 12, 16, 21, 4, 34, 797, DateTimeKind.Utc).AddTicks(5549),
-                            Description = "Postulación enviada",
-                            Name = "Enviada",
-                            Order = 1
-                        },
-                        new
-                        {
-                            Id = new Guid("00000000-0000-0000-0000-000000000002"),
-                            Color = "warning",
-                            Created = new DateTime(2025, 12, 16, 21, 4, 34, 797, DateTimeKind.Utc).AddTicks(5556),
-                            Description = "La empresa está revisando tu perfil",
-                            Name = "En Revisión",
-                            Order = 2
-                        },
-                        new
-                        {
-                            Id = new Guid("00000000-0000-0000-0000-000000000003"),
-                            Color = "primary",
-                            Created = new DateTime(2025, 12, 16, 21, 4, 34, 797, DateTimeKind.Utc).AddTicks(5559),
-                            Description = "Programado para entrevista",
-                            Name = "Entrevista",
-                            Order = 3
-                        },
-                        new
-                        {
-                            Id = new Guid("00000000-0000-0000-0000-000000000004"),
-                            Color = "success",
-                            Created = new DateTime(2025, 12, 16, 21, 4, 34, 797, DateTimeKind.Utc).AddTicks(5563),
-                            Description = "¡Felicitaciones! Fuiste seleccionado",
-                            Name = "Aceptada",
-                            Order = 4
-                        },
-                        new
-                        {
-                            Id = new Guid("00000000-0000-0000-0000-000000000005"),
-                            Color = "danger",
-                            Created = new DateTime(2025, 12, 16, 21, 4, 34, 797, DateTimeKind.Utc).AddTicks(5568),
-                            Description = "No fuiste seleccionado en esta ocasión",
-                            Name = "Rechazada",
-                            Order = 5
-                        });
                 });
 
             modelBuilder.Entity("Ilary.Domain.Entities.Coder", b =>
@@ -205,43 +132,6 @@ namespace Ilary.Infrastructure.Migrations
                     b.ToTable("Companies");
                 });
 
-            modelBuilder.Entity("Ilary.Domain.Entities.Job", b =>
-                {
-                    b.Property<Guid>("Id")
-                        .ValueGeneratedOnAdd()
-                        .HasColumnType("uuid");
-
-                    b.Property<Guid>("CompanyId")
-                        .HasColumnType("uuid");
-
-                    b.Property<DateTime>("Created")
-                        .HasColumnType("timestamp with time zone");
-
-                    b.Property<string>("Description")
-                        .IsRequired()
-                        .HasColumnType("text");
-
-                    b.Property<string>("Location")
-                        .IsRequired()
-                        .HasColumnType("text");
-
-                    b.Property<decimal>("Salary")
-                        .HasColumnType("numeric");
-
-                    b.Property<string>("Title")
-                        .IsRequired()
-                        .HasColumnType("text");
-
-                    b.Property<DateTime>("Updated")
-                        .HasColumnType("timestamp with time zone");
-
-                    b.HasKey("Id");
-
-                    b.HasIndex("CompanyId");
-
-                    b.ToTable("Jobs");
-                });
-
             modelBuilder.Entity("Ilary.Domain.Entities.JobApplication", b =>
                 {
                     b.Property<int>("Id")
@@ -253,17 +143,14 @@ namespace Ilary.Infrastructure.Migrations
                     b.Property<Guid>("CoderId")
                         .HasColumnType("uuid");
 
-                    b.Property<Guid?>("CompanyId")
+                    b.Property<Guid>("CompanyId")
+                        .HasColumnType("uuid");
+
+                    b.Property<Guid?>("CompanyId1")
                         .HasColumnType("uuid");
 
                     b.Property<DateTime>("Created")
                         .HasColumnType("timestamp with time zone");
-
-                    b.Property<Guid>("JobId")
-                        .HasColumnType("uuid");
-
-                    b.Property<Guid>("StatusId")
-                        .HasColumnType("uuid");
 
                     b.Property<DateTime>("Updated")
                         .HasColumnType("timestamp with time zone");
@@ -274,9 +161,7 @@ namespace Ilary.Infrastructure.Migrations
 
                     b.HasIndex("CompanyId");
 
-                    b.HasIndex("JobId");
-
-                    b.HasIndex("StatusId");
+                    b.HasIndex("CompanyId1");
 
                     b.ToTable("JobApplications");
                 });
@@ -326,17 +211,6 @@ namespace Ilary.Infrastructure.Migrations
                         .IsRequired();
                 });
 
-            modelBuilder.Entity("Ilary.Domain.Entities.Job", b =>
-                {
-                    b.HasOne("Ilary.Domain.Entities.Company", "Company")
-                        .WithMany("Jobs")
-                        .HasForeignKey("CompanyId")
-                        .OnDelete(DeleteBehavior.Cascade)
-                        .IsRequired();
-
-                    b.Navigation("Company");
-                });
-
             modelBuilder.Entity("Ilary.Domain.Entities.JobApplication", b =>
                 {
                     b.HasOne("Ilary.Domain.Entities.Coder", "Coder")
@@ -345,39 +219,24 @@ namespace Ilary.Infrastructure.Migrations
                         .OnDelete(DeleteBehavior.Cascade)
                         .IsRequired();
 
-                    b.HasOne("Ilary.Domain.Entities.Company", null)
-                        .WithMany("JobApplication")
-                        .HasForeignKey("CompanyId");
-
-                    b.HasOne("Ilary.Domain.Entities.Job", "Job")
-                        .WithMany("Applications")
-                        .HasForeignKey("JobId")
+                    b.HasOne("Ilary.Domain.Entities.Company", "Company")
+                        .WithMany()
+                        .HasForeignKey("CompanyId")
                         .OnDelete(DeleteBehavior.Cascade)
                         .IsRequired();
 
-                    b.HasOne("Ilary.Domain.Entities.ApplicationStatus", "Status")
-                        .WithMany()
-                        .HasForeignKey("StatusId")
-                        .OnDelete(DeleteBehavior.Restrict)
-                        .IsRequired();
+                    b.HasOne("Ilary.Domain.Entities.Company", null)
+                        .WithMany("JobApplication")
+                        .HasForeignKey("CompanyId1");
 
                     b.Navigation("Coder");
 
-                    b.Navigation("Job");
-
-                    b.Navigation("Status");
+                    b.Navigation("Company");
                 });
 
             modelBuilder.Entity("Ilary.Domain.Entities.Company", b =>
                 {
                     b.Navigation("JobApplication");
-
-                    b.Navigation("Jobs");
-                });
-
-            modelBuilder.Entity("Ilary.Domain.Entities.Job", b =>
-                {
-                    b.Navigation("Applications");
                 });
 #pragma warning restore 612, 618
         }

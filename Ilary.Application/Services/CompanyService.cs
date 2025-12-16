@@ -14,6 +14,8 @@ public class CompanyService
     }
     
     public Task<IEnumerable<Company>> GetCompanyAsync() => _repository.GetAllAsync();
+
+    public Task<Company?> GetCompanyByIdAsync(Guid id) => _repository.GetByIdAsync(id);
     
     public async Task AddCompanyAsync(CreateCompanyDto dto)
     {

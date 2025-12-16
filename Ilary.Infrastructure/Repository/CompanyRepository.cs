@@ -31,6 +31,9 @@ public class CompanyRepository:ICompanyRepository
     public async Task<Company?> GetByEmailAsync(string email) =>
         await _context.Companies.Include(c => c.Roles).FirstOrDefaultAsync(c => c.Email == email);
 
+    public async Task<Company?> GetByIdAsync(Guid id) =>
+        await _context.Companies.FindAsync(id);
+
     public Task UpdateAsync(Company Company)
     {
         throw new NotImplementedException();
