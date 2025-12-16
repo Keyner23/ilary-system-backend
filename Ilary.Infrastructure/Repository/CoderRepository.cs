@@ -16,7 +16,7 @@ public class CoderRepository :ICoderRepository
     
     
     public async Task<IEnumerable<Coder>> GetAllAsync() =>
-        await _context.Coder.ToListAsync();
+        await _context.Coder.Include(c => c.Roles).ToListAsync();
 
     
     public async Task AddAsync(Coder coder)
@@ -29,6 +29,9 @@ public class CoderRepository :ICoderRepository
         _context.Coder.Add(coder);
         await _context.SaveChangesAsync();
     }
+
+    public async Task<Coder?> GetByEmailAsync(string email) =>
+        await _context.Coder.Include(c => c.Roles).FirstOrDefaultAsync(c => c.Email == email);
 
 
     public Task UpdateAsync(Coder coder)

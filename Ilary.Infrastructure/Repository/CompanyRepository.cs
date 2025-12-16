@@ -15,14 +15,21 @@ public class CompanyRepository:ICompanyRepository
     }
     
     public async Task<IEnumerable<Company>> GetAllAsync() =>
-        await _context.Companies.ToListAsync();
+        await _context.Companies.Include(c => c.Roles).ToListAsync();
 
     
     public async Task AddAsync(Company Company)
     {
+        foreach (var role in Company.Roles)
+        {
+            _context.Attach(role);
+        }
         _context.Companies.Add(Company);
         await _context.SaveChangesAsync();
     }
+
+    public async Task<Company?> GetByEmailAsync(string email) =>
+        await _context.Companies.Include(c => c.Roles).FirstOrDefaultAsync(c => c.Email == email);
 
     public Task UpdateAsync(Company Company)
     {
