@@ -22,4 +22,18 @@ public class JobApplicationController : Controller
         return Ok(new { message = "Job application creada correctamente" });
     }
 
+    [HttpGet("job/{jobId}")]
+    public async Task<IActionResult> GetByJobId(Guid jobId)
+    {
+        var applications = await _service.GetJobApplicationsByJobIdAsync(jobId);
+        return Ok(applications);
+    }
+
+    [HttpGet("coder/{coderId}")]
+    public async Task<IActionResult> GetByCoderId(Guid coderId)
+    {
+        var applications = await _service.GetJobApplicationsByCoderIdAsync(coderId);
+        return Ok(applications);
+    }
+
 }

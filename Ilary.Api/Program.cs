@@ -15,12 +15,14 @@ builder.Services.AddDbContext<ApplicationDbContext>(options =>
 builder.Services.AddScoped<CoderService>();
 builder.Services.AddScoped<CompanyService>();
 builder.Services.AddScoped<JobApplicationService>();
+builder.Services.AddScoped<JobService>();
 builder.Services.AddScoped<AuthService>();
 
 //Repositories
 builder.Services.AddScoped<ICoderRepository, CoderRepository>();
 builder.Services.AddScoped<ICompanyRepository, CompanyRepository>();
 builder.Services.AddScoped<IJobApplicationRepository, JobApplicationRepository>();
+builder.Services.AddScoped<IJobRepository, JobRepository>();
 builder.Services.AddScoped<IRoleRepository, RoleRepository>();
 
 // JWT Authentication
@@ -64,7 +66,7 @@ builder.Services.AddCors(options =>
     options.AddPolicy("AllowFrontend",
         policy =>
         {
-            policy.WithOrigins("http://localhost:5173")
+            policy.AllowAnyOrigin() // Relaxed for debugging
                   .AllowAnyHeader()
                   .AllowAnyMethod();
         });
@@ -84,6 +86,9 @@ if (app.Environment.IsDevelopment())
 // app.UseHttpsRedirection();
 
 app.UseCors("AllowFrontend");
+
+app.UseAuthentication();
+app.UseAuthorization();
 
 app.MapControllers(); 
 
